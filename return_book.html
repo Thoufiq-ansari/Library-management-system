@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Return Book - Library Management System{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>Return Book</h1>
+  <p class="page-subtitle">View issued books and record returns</p>
+</div>
+
+<div class="toolbar">
+  <input type="text" id="returnSearch" class="search-input" placeholder="Search by book title, ISBN or member name...">
+</div>
+
+<div class="table-wrap">
+  <table class="data-table" id="returnTable">
+    <thead>
+      <tr>
+        <th>Txn ID</th>
+        <th>Book</th>
+        <th>ISBN</th>
+        <th>Member</th>
+        <th>Issue Date</th>
+        <th>Due Date</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="returnTableBody">
+      <tr><td colspan="8" class="empty-row">Loading...</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Return Confirm Modal -->
+<div class="modal-backdrop hidden" id="returnModalBackdrop">
+  <div class="modal modal-small">
+    <div class="modal-header">
+      <h2>Return Book</h2>
+      <button class="icon-btn" id="closeReturnModal">&times;</button>
+    </div>
+    <form id="returnForm" class="modal-form">
+      <input type="hidden" id="returnTxnId">
+      <div class="form-row">
+        <label for="returnDate">Return Date *</label>
+        <input type="date" id="returnDate" name="return_date" required>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" id="cancelReturnForm">Cancel</button>
+        <button type="submit" class="btn btn-primary">Confirm Return</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/return.js') }}"></script>
+{% endblock %}

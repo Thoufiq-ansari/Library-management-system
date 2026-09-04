@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Library Management System</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="login-body">
+  <div class="login-card">
+    <div class="login-brand">
+      <span class="brand-icon">&#128218;</span>
+      <h1>Library Management System</h1>
+      <p>Admin Login</p>
+    </div>
+
+    {% if error %}
+      <div class="alert-box alert-error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('login') }}" class="login-form">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required autofocus autocomplete="username">
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required autocomplete="current-password">
+
+      <button type="submit" class="btn btn-primary btn-block">Log In</button>
+    </form>
+
+  
+  </div>
+</body>
+</html>

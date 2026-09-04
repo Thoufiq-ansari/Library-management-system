@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}Members - Library Management System{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>Member Management</h1>
+  <p class="page-subtitle">Add, edit, search and manage library members</p>
+</div>
+
+<div class="toolbar">
+  <input type="text" id="memberSearch" class="search-input" placeholder="Search by name, member ID, email or department...">
+  <button class="btn btn-primary" id="openAddMemberBtn">+ Add Member</button>
+</div>
+
+<div class="table-wrap">
+  <table class="data-table" id="membersTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Department</th>
+        <th>Registered On</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="membersTableBody">
+      <tr><td colspan="7" class="empty-row">Loading members...</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Add/Edit Member Modal -->
+<div class="modal-backdrop hidden" id="memberModalBackdrop">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="memberModalTitle">Add Member</h2>
+      <button class="icon-btn" id="closeMemberModal">&times;</button>
+    </div>
+    <form id="memberForm" class="modal-form">
+      <input type="hidden" id="memberId" name="member_id">
+      <div class="form-row">
+        <label for="name">Full Name *</label>
+        <input type="text" id="name" name="name" required maxlength="150">
+      </div>
+      <div class="form-row">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required maxlength="150">
+      </div>
+      <div class="form-row">
+        <label for="phone">Phone Number *</label>
+        <input type="tel" id="phone" name="phone" required maxlength="30">
+      </div>
+      <div class="form-row">
+        <label for="department">Department</label>
+        <input type="text" id="department" name="department" maxlength="100">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" id="cancelMemberForm">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Member</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Member Detail Modal -->
+<div class="modal-backdrop hidden" id="memberDetailBackdrop">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Member Details</h2>
+      <button class="icon-btn" id="closeMemberDetail">&times;</button>
+    </div>
+    <div id="memberDetailBody"></div>
+  </div>
+</div>
+
+<!-- Delete Confirm Modal -->
+<div class="modal-backdrop hidden" id="confirmModalBackdrop">
+  <div class="modal modal-small">
+    <div class="modal-header">
+      <h2>Confirm Delete</h2>
+      <button class="icon-btn" id="closeConfirmModal">&times;</button>
+    </div>
+    <p id="confirmModalText">Are you sure you want to delete this item?</p>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-secondary" id="cancelConfirm">Cancel</button>
+      <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/members.js') }}"></script>
+{% endblock %}
